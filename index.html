@@ -59,11 +59,12 @@ body {
   font-size: 1.4rem;
 }
 #menu span {
+  display: block;
   text-align: center;
   position: relative;
-  font-size: 2rem;
+  font-size: 3rem;
   color: #000;
-  margin-top: 2rem;
+  margin-top: 6rem;
 }
 #menu span:after {
   font-weight: small;
@@ -78,59 +79,15 @@ body {
   display: flex;
   justify-content: center;
 }
-
-
 </style>
 </head>
 <body>
-<section id="menu">
-  <span class="antipasti"></span> <span class="primi"></span>
-  <span class="secondi"></span> <span class="dolci"></span><span class="formaggi"></span>
-</section> 
+<section id="menu"><div id="logo"><img height="300px" src="https://h4shell.github.io/ascibretta/img/logo-ascibretta.png"></div>
+  <span class="antipasti">antipasti</span><div class="item"><div class="container-items"><h3 class="product">verdure ripiene e polpette alla ligure</h3><p class="price">10.00</p></div><p class="ingredients">verdure, carne, farina</p></div><div class="item"><div class="container-items"><h3 class="product">flan di trombette</h3><p class="price">8.00</p></div><p class="ingredients">zucchine trombette,  pomodoro cuore di bue</p></div><div class="item"><div class="container-items"><h3 class="product">brandacujun accompagnato da panissa</h3><p class="price">12.00</p></div><p class="ingredients">stoccafisso,  patate,  prezzemolo,  pinolio, aglio di vessallico</p></div><div class="item"><div class="container-items"><h3 class="product">acciughe fritte</h3><p class="price">10.00</p></div><p class="ingredients">acciughe, olio di semi</p></div> <span class="primi">primi</span><div class="item"><div class="container-items"><h3 class="product">tagliolini verdi al ragù di coniglio</h3><p class="price">14.00</p></div><p class="ingredients">spinaci, farina, uovo, pomodoro, coniglio</p></div><div class="item"><div class="container-items"><h3 class="product">trofie al ragù</h3><p class="price">13.00</p></div><p class="ingredients">trofie, ragù di pesce</p></div><div class="item"><div class="container-items"><h3 class="product">maltagliati al pesto e prezzemolo</h3><p class="price">12.00</p></div><p class="ingredients">pesto alla genovese, formaggio, prezzemolo</p></div><div class="item"><div class="container-items"><h3 class="product">ravioli di piero</h3><p class="price">13.00</p></div><p class="ingredients">ripieni di erbette, ricotta, parmigiano, carne</p></div>
+  <span class="secondi">secondi</span><div class="item"><div class="container-items"><h3 class="product">seppie in umido all'antica (1870)</h3><p class="price">14.00</p></div><p class="ingredients">seppie, zucchine trombette</p></div><div class="item"><div class="container-items"><h3 class="product">polpo spadellato</h3><p class="price">16.00</p></div><p class="ingredients">polpo, crema di fagioli di pigna</p></div><div class="item"><div class="container-items"><h3 class="product">filetto di baccalà</h3><p class="price">14.00</p></div><p class="ingredients">stocafisso, salsa di pomodorini, olive taggiasche</p></div><div class="item"><div class="container-items"><h3 class="product">coniglio al rossese di dolceacqua</h3><p class="price">13.00</p></div><p class="ingredients">coniglio, patate di montagna al forno</p></div> <span class="dolci">dolci</span><div class="item"><div class="container-items"><h3 class="product">torta stroscia</h3><p class="price">5.00</p></div><p class="ingredients">torta al vino passito</p></div><div class="item"><div class="container-items"><h3 class="product">torta di ricotta</h3><p class="price">5.00</p></div><p class="ingredients">torta, scaglie di cioccolato, arancio amaro di vallebona</p></div><div class="item"><div class="container-items"><h3 class="product">budino ai fiori di arancia</h3><p class="price">5.00</p></div><p class="ingredients">uova, latte, fiori di arancia</p></div><div class="item"><div class="container-items"><h3 class="product">tiramisù classico</h3><p class="price">5.00</p></div><p class="ingredients">savoiardi, mascarpone, caffè, cioccolato in polvere</p></div><span class="formaggi">formaggi</span><div class="item"><div class="container-items"><h3 class="product">toma</h3><p class="price">7.00</p></div><p class="ingredients">toma di pecora brigasca</p></div>
+</section>
 
-<script>
-const username = "ascibretta";
-const app = document.querySelector("#menu");
-const logo = document.createElement("div");
-
-logo.id = "logo";
-app.prepend(logo);
-
-cont = 0;
-
-fetch("https://testexpress.lorenzofornara.repl.co/" + username)
-  .then((res) => res.json())
-  .then((data) => {
-  
-  logo.innerHTML = `<img height="300px"src="${data[1]}">`;
-  
-      data[0].forEach((e) => {
-      e.product_ingredients = e.product_ingredients.split(",");
-        e.product_ingredients = e.product_ingredients.join(', ')
-      
-      if(document.querySelector("." + e.type)){
-        
-        document.querySelector("." + e.type).innerText = e.type
-        
-        document.querySelector("." + e.type).insertAdjacentHTML("afterend", '<div class="item"><div class="container-items"><h3 class="product">'+ e.product_name +'</h3><p class="price">' + e.price.toFixed(2) +'</p></div><p class="ingredients">' + e.product_ingredients + '</p></div>')
-
-         } else {
-           const item2 = document.createElement("span");
-           
-      item2.classList.add(e.type);
-           
-      app.appendChild(item2);
-           
-            
-      document.querySelector("." + e.type).insertAdjacentHTML("afterend", '<div class="item"><div class="container-items"><h3 class="product">'+ e.product_name +'</h3><p class="price">' + e.price.toFixed(2) +'</p></div><p class="ingredients">' + e.product_ingredients + '</p></div>')
-         }
-      
-      ++cont;
-      
-    });
-  })
-  .catch((err) => console.error(err));
-//# sourceURL=userscript.js
+<script src="filesystem:chrome-extension://lkfkkhfhhdkiemehlpkgjeojomhpccnh/temporary/script.js">
 </script>
 </body>
 </html>
