@@ -8,6 +8,7 @@
 #menu .item,
 #menu span {
   text-transform: uppercase;
+  
 }
 :root {
   --text-color: #555;
@@ -18,30 +19,32 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
-  width: min(100% - 2rem, 63pc);
-  margin: 0 auto;
+
+body{
+  
+  display: flex;
+  justify-content: center;
 }
+
 #menu {
+  overflow: hidden;
+  width: min(100% - 3rem, 56pc);
   color: var(--text-color);
   font-family: Raleway, sans-serif;
   text-rendering: optimizeLegibility;
   flex-direction: column;
   display: flex;
   gap: 1rem;
-  margin: 3rem 0;
+  margin-bottom: 6rem
+  
 }
-#menu .item {
-  padding: 0.5rem 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 2fr;
-}
+
 #menu .container-items {
   display: grid;
-  justify-content: space-between;
+  
   border-bottom: 0.2rem dotted #d5d5d5;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 3fr 2fr;
+  
 }
 #menu .price,
 #menu .product {
@@ -64,8 +67,13 @@ body {
   position: relative;
   font-size: 3rem;
   color: #000;
-  margin-top: 6rem;
+  margin-top: 4rem;
 }
+
+#menu .item{
+  margin: 1rem 0;
+}
+
 #menu span:after {
   font-weight: small;
   margin: 1.5rem auto;
@@ -75,10 +83,33 @@ body {
   height: 0.15rem;
   background: var(--primary-color);
 }
+
+#menu .price{
+  text-align: right;
+}
+
 #logo {
+  max-width: 100%;
+  max-height: 100%;
   display: flex;
   justify-content: center;
 }
+
+
+
+@media (max-width: 66pc){
+  
+
+  #logo img {
+  width: 600px;
+  height: auto;
+  
+}
+}
+
+
+
+
 </style>
 </head>
 <body>
